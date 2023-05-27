@@ -14,8 +14,8 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 - Reescrita de URL
 - Reconhece arquivos .htaccess
 - Strict Mode para banco de dados Desabilitado
-- É feita a instalação do SASS de forma global (Pré processador de CSS)
-- Porta 80 sem SSl
+- É feita a instalação do SASS de forma global
+- Porta 80 sem SSL
 - Porta 443 com SSL
 
 ## Volumes compartilhados docker-compose
