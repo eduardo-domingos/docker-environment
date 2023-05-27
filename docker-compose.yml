@@ -1,0 +1,32 @@
+version: "4.0"
+services:
+
+  db:
+    container_name: mariadb
+    image: mariadb:10.9
+    command: mysqld --sql_mode=
+    environment:
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-conf/db:/var/lib/mysql
+
+  app:
+    container_name: "php8-apache"
+    image: eduardodomingos/webserver:4.0
+    volumes:
+      - ./:/var/www/html
+      - ./docker-conf/php/php.ini:/etc/php/8.2/apache2/php.ini
+      - ./docker-conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
+      - ./docker-conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
+      - ./docker-conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - db
+    depends_on:
+      - db
+    tty: true
