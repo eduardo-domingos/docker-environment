@@ -31,3 +31,20 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 
 * ./docker-conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
     * configuração do virtualhost (porta 80, 443, SSL, reescrita de URL)
+
+* ./docker-conf/db:/var/lib/mysql
+   * persistência do dados do banco
+
+- Todos esse arquivos de configurações ficam dentro da pasta docker-conf
+
+## Executar projeto
+Para construir a imagem
+~~~
+docker build -t imagem:versao .
+~~~
+
+Para subir os containers
+~~~
+docker-compose up -d
+~~~
+
