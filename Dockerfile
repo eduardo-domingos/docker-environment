@@ -8,12 +8,13 @@ ENV php=php8.2
 # instala as atualizações
 RUN apt-get update && apt-get upgrade -y
 
-# adicionar repositório para externo do php (5.6 até 8.2)
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ondrej/php && apt-get update
-
 # define o data/hora como São Paulo
 RUN ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime && echo ${timezone} > /etc/timezone
+
+# adicionar repositório para externo do php (5.6 até 8.2)
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:ondrej/php 
+RUN apt-get update
     
 # instala os pacotes necessários para trabalhar com php-apache 
 RUN apt-get install -y apache2 
@@ -46,7 +47,8 @@ RUN mkdir /etc/ssl/ca
 
 # instalação do NodeJs
 RUN apt-get install -y curl
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - 
+RUN apt-get install -y nodejs
 #RUN npm install -g sass
 
 # expondo portas do docker para acesso a máquina fora do docker acessar
