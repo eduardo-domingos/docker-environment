@@ -6,8 +6,8 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 - PHP      8.2.6
 - Composer 2.5.7
 - MariaDB  10.9
-- Nodejs   18.16.o
-- npm      9.5.1
+- Nodejs   18.16.0
+- NPM      9.5.1
 
 ## Recursos da imagem/container
 - SSL 
@@ -30,7 +30,7 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 
 * ./docker-conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
 * ./docker-conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
-    * arquivos para o SSL (certificado autoassinado)
+    * arquivos para o SSL (certificado autoassinado), esse diretório é referenciado no arquivo de virtualhost.conf
 
     #
 
@@ -49,7 +49,7 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 ## Executar projeto
 Para construir a imagem
 ~~~
-docker build -t imagem:versao .
+docker build -t seu-nome/nome-da-imagem:versao .
 ~~~
 
 Para subir os containers
