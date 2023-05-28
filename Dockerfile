@@ -15,7 +15,7 @@ RUN add-apt-repository ppa:ondrej/php && apt-get update
 # define o data/hora como São Paulo
 RUN ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime && echo ${timezone} > /etc/timezone
     
-# instala os pacotes necessários para trabalhar com php-apache-nodejs   
+# instala os pacotes necessários para trabalhar com php-apache 
 RUN apt-get install -y apache2 
 RUN apt-get install -y libapache2-mod-php 
 RUN apt-get install -y ${php} 
@@ -30,8 +30,6 @@ RUN apt-get install -y ${php}-xml
 RUN apt-get install -y ${php}-mbstring
 RUN apt-get install -y ${php}-fpm
 RUN apt-get install -y ${php}-ftp
-RUN apt-get install -y nodejs
-RUN apt-get install -y npm
     
 # instalando coposer   
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 
@@ -46,8 +44,10 @@ RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN mkdir /etc/ssl/ca
 
-# instalação do SASS de forma global
-RUN npm install -g sass
+# instalação do NodeJs
+RUN apt-get install -y curl
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+#RUN npm install -g sass
 
 # expondo portas do docker para acesso a máquina fora do docker acessar
 EXPOSE 80
