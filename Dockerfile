@@ -17,7 +17,7 @@ RUN add-apt-repository ppa:ondrej/php
 RUN apt-get update
     
 # instala os pacotes necessários para trabalhar com php-apache 
- RUN apt-get install -y ${php} 
+RUN apt-get install -y ${php} 
 RUN apt-get install -y ${php}-opcache 
 RUN apt-get install -y ${php}-cli
 RUN apt-get install -y ${php}-xdebug 
@@ -31,6 +31,8 @@ RUN apt-get install -y ${php}-fpm
 RUN apt-get install -y ${php}-ftp
 RUN apt-get install -y apache2 
 RUN apt-get install -y libapache2-mod-php
+RUN apt-get install -y zip 
+RUN apt-get install -y unzip
     
 # instalando coposer   
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 
