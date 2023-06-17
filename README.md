@@ -1,12 +1,12 @@
 # Descrição
-Ambiente com foco em desenvolvimento Web com PHP e Nodejs
+Ambiente com foco em desenvolvimento Web com PHP
 
 ## Dockerfile e docker-compose
 - Apache   2.4.5
-- PHP      8.2.6
+- PHP      8.x (pode ser alterado no arquivo)
 - Composer 2.5.7
 - MariaDB  10.9
-- Nodejs   18.16.0
+- Nodejs   18.x
 - NPM      9.5.1
 
 ## Recursos
@@ -26,32 +26,32 @@ Ambiente com foco em desenvolvimento Web com PHP e Nodejs
 
     #
 
-* ./docker-conf/php/php.ini:/etc/php/8.2/apache2/php.ini
+* ./conf/php/php.ini:/etc/php/${php}/apache2/php.ini
     * é um arquivo de php.ini modificado
 
     #
 
-* ./docker-conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
-* ./docker-conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
+* ./conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
+* ./conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
     * arquivos para o SSL (certificado autoassinado), esse diretório é referenciado no arquivo de virtualhost.conf
 
     #
 
-* ./docker-conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
-    * configuração do virtualhost (porta 80, 443, SSL, reescrita de URL)
+* ./conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
+    * configuração do virtualhost (portas 80 e 443, SSL, reescrita de URL, .htaccess)
 
     #
 
-* ./docker-conf/db:/var/lib/mysql
+* ./conf/db:/var/lib/mysql
    * persistência do dados do banco
 
    #
 
 ## Executar Ambiente Docker
 
-- Quando for executar um projeto php com esse docker a pasta do mesmo projeto precisa ficar dentro da pasta docker-xampp
+- Quando for executar um projeto php, o mesmo precisa estar dentro da pasta www
 
-- É necessário criar um .env dentro da pasta docker-xampp (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
+- É necessário criar um .env dentro da pasta conf (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
 
 - Todas as configurações dos containers estão centralizados no arquivo docker-compose.yml, assim só é necessário executar o comando abaixo:
 
