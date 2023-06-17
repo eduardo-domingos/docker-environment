@@ -6,7 +6,7 @@ services:
     image: mariadb:10.9
     command: mysqld --sql_mode=
     env_file:
-      - ./conf/.env
+      - .env
     ports:
       - 3306:3306
     volumes:
@@ -21,7 +21,7 @@ services:
         - timezone=${timezone}
         - php=${php}
     env_file:
-      - ./conf/.env
+      - .env
     volumes:
       - ./www/:/var/www/html
       - ./conf/php/php.ini:/etc/php/${php}/apache2/php.ini

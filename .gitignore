@@ -1,5 +1,5 @@
 conf/db/*
 conf/php/*
 conf/ssl/*
-conf/.env
+.env
 www/*
