@@ -51,22 +51,22 @@ Ambiente com foco em desenvolvimento Web com PHP
 
 - O ideal é copiar php.ini de dentro do container, criar um backup, e cria um novo arquivo com as alterações abaixo. Tanto o backup quanto o novo arquivo devem permanecer na pasta conf/php, com nomes diferentes para não gerar problema, no arquivo docker-compose.yml essa pasta está mapeada como volume compartilhado, assim é "refletido" as alterações dentro do container
 
-memory_limit=512M
-error_reporting=E_ALL
-date.timezone = America/Sao_Paulo
-allow_url_fopen = Off
-max_execution_time = 5
-post_max_size = 25M
-max_input_nesting_level = 64
-file_uploads = On
-upload_max_filesize = 8M
-max_file_uploads = 3
-output_buffering = 4096
-realpath_cache_size = 4096k
-realpath_cache_ttl = 120
-track_errors = Off
-allow_url_fopen = On
-allow_url_include = Off
+- memory_limit=512M
+- error_reporting=E_ALL
+- date.timezone = America/Sao_Paulo
+- allow_url_fopen = Off
+- max_execution_time = 5
+- post_max_size = 25M
+- max_input_nesting_level = 64
+- file_uploads = On
+- upload_max_filesize = 8M
+- max_file_uploads = 3
+- output_buffering = 4096
+- realpath_cache_size = 4096k
+- realpath_cache_ttl = 120
+- track_errors = Off
+- allow_url_fopen = On
+- allow_url_include = Off
 
 ## Executar Ambiente Docker
 
