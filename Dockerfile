@@ -2,10 +2,10 @@
 FROM ubuntu:latest
 
 # variáveis de ambiente, vem de forma dinâmica, o docker-compose.yml carrega as variáveis do .env e chega no Dockerfile
-ARG timezone
-ARG php
-ENV timezone=${timezone}
-ENV php=${php}
+ARG TIMEZONE
+ARG PHP_VERSION
+ENV timezone=${TIMEZONE}
+ENV php_version=${PHP_VERSION}
 
 # define o data/hora como São Paulo
 RUN ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime && echo ${timezone} > /etc/timezone
@@ -26,20 +26,20 @@ RUN add-apt-repository ppa:ondrej/php && apt-get update
     
 # instala os pacotes necessários para trabalhar com php-apache 
 RUN apt install -y apache2 
-RUN apt install -y libapache2-mod-${php} 
-RUN apt install -y ${php} 
-RUN apt install -y ${php}-opcache 
-RUN apt install -y ${php}-cli 
-RUN apt install -y ${php}-xdebug 
-RUN apt install -y ${php}-mysql 
-RUN apt install -y ${php}-zip 
-RUN apt install -y ${php}-curl 
-RUN apt install -y ${php}-gd 
-RUN apt install -y ${php}-xml 
-RUN apt install -y ${php}-mbstring 
-RUN apt install -y ${php}-fpm 
-RUN apt install -y ${php}-ftp 
-RUN apt install -y ${php}-common 
+RUN apt install -y libapache2-mod-php${php_version} 
+RUN apt install -y php${php_version} 
+RUN apt install -y php${php_version}-opcache 
+RUN apt install -y php${phphp_versionp}-cli 
+RUN apt install -y php${phphp_versionp}-xdebug 
+RUN apt install -y php${php_version}-mysql 
+RUN apt install -y php${php_version}-zip 
+RUN apt install -y php${php_version}-curl 
+RUN apt install -y php${php_version}-gd 
+RUN apt install -y php${php_version}-xml 
+RUN apt install -y php${php_version}-mbstring 
+RUN apt install -y php${php_version}-fpm 
+RUN apt install -y php${php_version}-ftp 
+RUN apt install -y php${php_version}-common 
     
 # instalando coposer   
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 

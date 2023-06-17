@@ -1,5 +1,6 @@
 conf/db/*
-conf/php/*
-conf/ssl/*
+conf/php/
+conf/ssl/*.ext
+conf/ssl/*.txt
 .env
 www/*

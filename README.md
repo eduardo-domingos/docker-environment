@@ -51,6 +51,10 @@ Ambiente com foco em desenvolvimento Web com PHP
 
 - O ideal é copiar php.ini de dentro do container, criar um backup, e cria um novo arquivo com as alterações abaixo. Tanto o backup quanto o novo arquivo devem permanecer na pasta conf/php, com nomes diferentes para não gerar problema, no arquivo docker-compose.yml essa pasta está mapeada como volume compartilhado, assim é "refletido" as alterações dentro do container
 
+~~~
+cp /etc/php/version.php/apache2/php.ini ./
+~~~
+
 - memory_limit=512M
 - error_reporting=E_ALL
 - date.timezone = America/Sao_Paulo
@@ -70,6 +74,8 @@ Ambiente com foco em desenvolvimento Web com PHP
 
 ## Executar Ambiente Docker
 
+- Criar as pastas "db" e "php" dentro da pasta "conf", criar a pasta "www" fora da pasta "conf"
+
 - Quando for executar um projeto php, o mesmo precisa estar dentro da pasta www
 
 - É necessário criar um .env dentro da pasta docker-environment (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
@@ -86,7 +92,7 @@ docker compose up -d
 docker compose up -d --build
 ~~~
 
-- Caso queira trocar a versão do php do projeto basta acessar o .env e alterar a variável "php=php5.6" para "php=php8.2" ou a versão desejada, e executar o comando abaxio:
+- Caso queira trocar a versão do php do projeto basta acessar o .env e alterar a variável "php=5.6" para "php=8.2" ou a versão desejada, e executar o comando abaxio:
 
 ~~~
 docker compose up -d --build
