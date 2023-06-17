@@ -49,13 +49,9 @@ Ambiente com foco em desenvolvimento Web com PHP e Nodejs
 
 ## Executar Ambiente Docker
 
+- Quando for executar um projeto php com esse docker a pasta do mesmo projeto precisa ficar dentro da pasta docker-xampp
+
 - É necessário criar um .env dentro da pasta docker-xampp (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
-
-- Caso a imagem do php precise de algum ajuste, basta editar o arquivo Dockerfile, para gerar uma nova imagem e executar o seguinte comando:
-
-~~~
-docker compose up -d --build
-~~~
 
 - Todas as configurações dos containers estão centralizados no arquivo docker-compose.yml, assim só é necessário executar o comando abaixo:
 
@@ -63,4 +59,8 @@ docker compose up -d --build
 docker compose up -d
 ~~~~
 
-- Quando for executar um projeto php com esse docker a pasta do mesmo projeto precisa ficar dentro da pasta docker-xampp
+- Caso a imagem do php precise de algum ajuste, basta editar o arquivo Dockerfile, para gerar uma nova imagem e executar o seguinte comando:
+
+~~~
+docker compose up -d --build
+~~~

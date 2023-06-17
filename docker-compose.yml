@@ -6,11 +6,11 @@ services:
     image: mariadb:10.9
     command: mysqld --sql_mode=
     env_file:
-      - .env
+      - ./conf/.env
     ports:
       - 3306:3306
     volumes:
-      - ./docker-conf/db:/var/lib/mysql
+      - ./conf/db:/var/lib/mysql
 
   app-php:
     container_name: "php-apache"
@@ -21,13 +21,13 @@ services:
         - timezone=${timezone}
         - php=${php}
     env_file:
-      - .env
+      - ./conf/.env
     volumes:
       - ./www/:/var/www/html
-      - ./docker-conf/php/php.ini:/etc/php/${php}/apache2/php.ini
-      - ./docker-conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
-      - ./docker-conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
-      - ./docker-conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./conf/php/php.ini:/etc/php/${php}/apache2/php.ini
+      - ./conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
+      - ./conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
+      - ./conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
     ports:
       - 80:80
       - 443:443

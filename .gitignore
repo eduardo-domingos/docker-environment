@@ -1,5 +1,5 @@
-docker-conf/db/*
-docker-conf/php/*
-docker-conf/ssl/*
+conf/db/*
+conf/php/*
+conf/ssl/*
+conf/.env
 www/*
-.env
