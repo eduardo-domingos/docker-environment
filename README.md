@@ -1,7 +1,7 @@
-# Sobre o Projeto
-A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com php
+# Descrição
+Ambiente com foco em desenvolvimento Web com PHP e Nodejs
 
-## Tecnologias que estão na imagem
+## Dockerfile e docker-compose
 - Apache   2.4.5
 - PHP      8.2.6
 - Composer 2.5.7
@@ -9,15 +9,18 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 - Nodejs   18.16.0
 - NPM      9.5.1
 
-## Recursos da imagem/container
+## Recursos
 - SSL 
 - Reescrita de URL
-- Reconhece arquivos .htaccess
+- .htaccess
 - Strict Mode para banco de dados Desabilitado
-- Porta 80 sem SSL
 - Porta 443 com SSL
+- Porta 80 sem SSL
 
 ## Volumes compartilhados docker-compose
+
+- Todos os arquivos de configurações (php.ini, certificado etc..) ficam dentro da pasta docker-conf
+
 * ./:/var/www/html 
     * tem relação com o WORKDIR do Dockerfile, será a pasta a onde ficarão os arquivos do projeto
 
@@ -44,16 +47,20 @@ A idea é ter um ambiente muito similar ao XAMPP para desenvolvimento web com ph
 
    #
 
-- Todos esse arquivos de configurações ficam dentro da pasta docker-conf
+## Executar Ambiente Docker
 
-## Executar projeto
-Para construir a imagem
-~~~
-docker build -t seu-nome/nome-da-imagem:versao .
-~~~
+- É necessário criar um .env dentro da pasta docker-xampp (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
 
-Para subir os containers
+- Caso a imagem do php precise de algum ajuste, basta editar o arquivo Dockerfile, para gerar uma nova imagem e executar o seguinte comando:
+
 ~~~
-docker-compose up -d
+docker compose up -d --build
 ~~~
 
+- Todas as configurações dos containers estão centralizados no arquivo docker-compose.yml, assim só é necessário executar o comando abaixo:
+
+~~~~
+docker compose up -d
+~~~~
+
+- Quando for executar um projeto php com esse docker a pasta do mesmo projeto precisa ficar dentro da pasta docker-xampp
