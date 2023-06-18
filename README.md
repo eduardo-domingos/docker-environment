@@ -80,6 +80,10 @@ cp /etc/php/version.php/apache2/php.ini ./
 
 - É necessário criar um .env dentro da pasta docker-environment (siga o .env-example como exemplo) ali fica todas as variáveis de ambiente do projeto, seja do container de php e/ou do mysql/mariadb
 
+- Se estiver no Windows é necessário importar o certificado "conf/ssl/server.crt" com "autoridade certificadora de raiz confiável"
+
+- Se estiver em alguma distribuição Linux, é necessário importar o certificado "conf/ssl/server.pem" no navegador (chrome, firefox etc...)
+
 - Todas as configurações dos containers estão centralizados no arquivo docker-compose.yml, assim só é necessário executar o comando abaixo:
 
 ~~~~
