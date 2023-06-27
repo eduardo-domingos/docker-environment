@@ -6,8 +6,6 @@ Ambiente com foco em desenvolvimento Web com PHP
 - PHP      8.x (pode ser alterado no arquivo)
 - Composer 2.5.7
 - MariaDB  10.9
-- Nodejs   18.x
-- NPM      9.5.1
 
 ## Recursos
 - SSL 

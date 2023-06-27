@@ -36,13 +36,3 @@ services:
     depends_on:
       - db
     tty: true
-
-  app-nodejs: 
-    container_name: "nodejs"
-    image: node:18
-    command: /bin/bash
-    volumes:
-      - ./www/:/var/www/html
-    ports:
-      - 8000:8000
-    tty: true
