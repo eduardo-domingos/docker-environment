@@ -29,8 +29,8 @@ RUN apt install -y apache2
 RUN apt install -y libapache2-mod-php${php_version} 
 RUN apt install -y php${php_version} 
 RUN apt install -y php${php_version}-opcache 
-RUN apt install -y php${phphp_versionp}-cli 
-RUN apt install -y php${phphp_versionp}-xdebug 
+RUN apt install -y php${php_version}-cli 
+RUN apt install -y php${php_version}-xdebug 
 RUN apt install -y php${php_version}-mysql 
 RUN apt install -y php${php_version}-zip 
 RUN apt install -y php${php_version}-curl 

@@ -101,3 +101,5 @@ docker compose up -d --build
 ~~~
 docker compose up -d --build
 ~~~
+
+- Caso vá criar um arquivo php.ini personalizado a partir do php.ini de dentro do container, comente a linha que cria um volume compartilhado para o arquivo php.ini (docker-compose.yml), após acessar o container, faça um cópia e altere e depois de descomente do arquivo docker-compose.yml, será necessário fazer o build o projeto novamente

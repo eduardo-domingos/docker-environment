@@ -13,7 +13,7 @@ services:
       - ./conf/db:/var/lib/mysql
 
   app-php:
-    container_name: "php-apache"
+    container_name: "php${PHP_VERSION}-apache"
     build:
       context: .
       dockerfile: Dockerfile
@@ -24,7 +24,7 @@ services:
       - .env
     volumes:
       - ./www/:/var/www/html
-      - ./conf/php/php.ini:/etc/php/${PHP_VERSION}/apache2/php.ini
+      #- ./conf/php/php.ini:/etc/php/${PHP_VERSION}/apache2/php.ini
       - ./conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
       - ./conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
       - ./conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
