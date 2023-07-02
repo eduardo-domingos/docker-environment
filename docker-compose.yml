@@ -1,9 +1,9 @@
-version: "4.3"
+version: "4.4"
 services:
 
   db:
     container_name: mariadb
-    image: mariadb:10.9
+    image: mariadb:10.4
     command: mysqld --sql_mode=
     env_file:
       - .env
