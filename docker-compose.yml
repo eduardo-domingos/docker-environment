@@ -4,7 +4,7 @@ services:
   db:
     container_name: mariadb
     image: mariadb:10.4
-    command: mysqld --sql_mode=
+    command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
     env_file:
       - .env
     ports:
