@@ -19,8 +19,7 @@ RUN apt install -y \
     unzip \
     apt-transport-https \
     ca-certificates \
-    curl \
-    bash-completion
+    curl
 
 # repositório com php (5.6 até 8.x)
 RUN add-apt-repository ppa:ondrej/php \
