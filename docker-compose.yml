@@ -2,8 +2,8 @@ version: "4.5"
 services:
 
   db:
-    container_name: mariadb
-    image: mariadb:10.4
+    container_name: "mariadb"
+    image: "mariadb:${MYSQL_VERSION}"
     command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
     env_file:
       - .env
@@ -27,7 +27,7 @@ services:
       - ./conf/php/${PHP_VERSION}/php.ini:/etc/php/${PHP_VERSION}/apache2/php.ini
       - ./conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
       - ./conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
-      - ./conf/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./conf/apache/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - 80:80
       - 443:443

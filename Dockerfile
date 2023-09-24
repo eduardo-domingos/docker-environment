@@ -50,10 +50,15 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer &&\
     chmod a+x /usr/local/bin/composer
 
+# habilita módulo do apache para o php
+RUN a2enmod php${php_version}
+
 # habilitando ssl/reescrita de url (url amigaveis)
 RUN a2enmod expires &&\
     a2enmod rewrite &&\
     a2enmod ssl
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # expondo portas do docker para acesso a máquina fora do docker acessar
 EXPOSE 80 443
