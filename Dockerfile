@@ -1,48 +1,42 @@
 # imagem base
-FROM ubuntu:latest
+FROM php:7.1.33-apache
 
-# variáveis de ambiente, vem de forma dinâmica, o docker-compose.yml carrega as variáveis do .env e chega no Dockerfile
-ARG TIMEZONE PHP_VERSION
-ENV timezone=${TIMEZONE} php_version=${PHP_VERSION}
+ENV timezone=America/Sao_Paulo
 
 # define o data/hora como São Paulo
 RUN ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime &&\
     echo ${timezone} > /etc/timezone
 
-# instala as atualizações
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get install -y \ 
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \ 
+    libgd-dev \
+    libzip-dev
 
-# pacotes essenciais 
-RUN apt install -y \
-    software-properties-common \ 
-    zip  \ 
-    unzip \
-    apt-transport-https \
-    ca-certificates \
-    curl
+RUN docker-php-ext-configure gd \ 
+    --with-freetype-dir=/usr/include/ \ 
+    --with-jpeg-dir=/usr/include/
 
-# repositório com php (5.6 até 8.x)
-RUN add-apt-repository ppa:ondrej/php \
-    && apt-get update
-    
-# instala os pacotes necessários para trabalhar com php-apache 
-RUN apt install -y \
-    apache2 \
-    libapache2-mod-php${php_version} \
-    php${php_version} \
-    php${php_version}-opcache \
-    php${php_version}-cli \
-    php${php_version}-xdebug \
-    php${php_version}-mysql \
-    php${php_version}-zip \
-    php${php_version}-curl \
-    php${php_version}-gd \
-    php${php_version}-xml \
-    php${php_version}-mbstring \
-    php${php_version}-fpm \
-    php${php_version}-ftp \
-    php${php_version}-common 
-    
+RUN pecl install xdebug-2.9.8
+
+RUN docker-php-ext-install \
+    mysqli \
+    pdo \
+    pdo_mysql \
+    opcache \
+    gd \
+    zip
+
+RUN docker-php-ext-enable \
+    xdebug \
+    mysqli \
+    pdo \
+    pdo_mysql \
+    opcache \
+    gd \
+    zip \
+    xdebug
+
 # instalando coposer   
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\
     php composer-setup.php &&\
@@ -50,12 +44,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer &&\
     chmod a+x /usr/local/bin/composer
 
-# habilita módulo do apache para o php
-RUN a2enmod php${php_version}
-
 # habilitando ssl/reescrita de url (url amigaveis)
-RUN a2enmod expires &&\
-    a2enmod rewrite &&\
+RUN a2enmod rewrite &&\
     a2enmod ssl
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
@@ -64,9 +54,4 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 EXPOSE 80 443
 
 # diretório a ser utilizado no docker
-WORKDIR /var/www/html
-
-# executa ao inicar o container
-ENTRYPOINT /etc/init.d/apache2 start && /bin/bash
-
-CMD ["true"]
+WORKDIR /var/www/html/

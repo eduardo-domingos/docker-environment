@@ -1,32 +1,24 @@
-version: "4.5"
+version: "5.0"
 services:
 
   db:
     container_name: "mariadb"
-    image: "mariadb:${MYSQL_VERSION}"
+    image: "mariadb:10.4"
     command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
-    env_file:
-      - .env
     ports:
       - 3306:3306
     volumes:
       - ./conf/db:/var/lib/mysql
 
   php:
-    container_name: "php${PHP_VERSION}"
+    container_name: "php-apache"
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        - TIMEZONE=${TIMEZONE}
-        - PHP_VERSION=${PHP_VERSION}
-    env_file:
-      - .env
     volumes:
-      - ./www/:/var/www/html
-      - ./conf/php/${PHP_VERSION}/php.ini:/etc/php/${PHP_VERSION}/apache2/php.ini
-      - ./conf/ssl/localhost.crt:/etc/ssl/ca/localhost.crt
-      - ./conf/ssl/localhost.key:/etc/ssl/ca/localhost.key
+      - ./www/:/var/www/html/
+      - ./conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./conf/ssl/localhost.crt:/etc/ssl/certs/localhost.crt
+      - ./conf/ssl/localhost.key:/etc/ssl/private/localhost.key
       - ./conf/apache/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - 80:80
@@ -35,4 +27,3 @@ services:
       - db
     depends_on:
       - db
-    tty: true
