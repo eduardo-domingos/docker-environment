@@ -7,7 +7,6 @@ services:
     command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
-      - MARIADB_DATABASE=fsphp
     ports:
       - 3306:3306
     volumes:
