@@ -11,31 +11,31 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \ 
     libgd-dev \
-    libzip-dev
+    libzip-dev &&\
+    docker-php-ext-configure gd \ 
+        --with-freetype-dir=/usr/include/ \ 
+        --with-jpeg-dir=/usr/include/ &&\
+    docker-php-ext-install gd
 
-RUN docker-php-ext-configure gd \ 
-    --with-freetype-dir=/usr/include/ \ 
-    --with-jpeg-dir=/usr/include/
-
-RUN pecl install xdebug-2.9.8
+RUN pecl install xdebug-2.9.8 \
+    && docker-php-ext-enable xdebug
 
 RUN docker-php-ext-install \
     mysqli \
     pdo \
     pdo_mysql \
     opcache \
-    gd \
     zip
 
-RUN docker-php-ext-enable \
-    xdebug \
-    mysqli \
-    pdo \
-    pdo_mysql \
-    opcache \
-    gd \
-    zip \
-    xdebug
+# arquivos de configurações
+COPY ./conf/php/form.ini "${PHP_INI_DIR}/conf.d/form.ini"
+COPY ./conf/php/errors.ini "${PHP_INI_DIR}/conf.d/errors.ini"
+COPY ./conf/php/timezone.ini "${PHP_INI_DIR}/conf.d/timezone.ini"
+COPY ./conf/php/memory.ini "${PHP_INI_DIR}/conf.d/memory.ini"
+COPY ./conf/php/xdebug.ini "${PHP_INI_DIR}/conf.d/xdebug.ini"
+COPY ./conf/ssl/localhost.crt /etc/ssl/certs/localhost.crt
+COPY ./conf/ssl/localhost.key /etc/ssl/private/localhost.key
+COPY ./conf/apache/virtualhost.conf /etc/apache2/sites-available/000-default.conf
 
 # instalando coposer   
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\

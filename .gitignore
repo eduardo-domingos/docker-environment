@@ -3,3 +3,4 @@ conf/ssl/*.ext
 conf/ssl/*.txt
 .env
 www/*
+.vscode

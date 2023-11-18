@@ -5,6 +5,9 @@ services:
     container_name: "mariadb"
     image: "mariadb:10.4"
     command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=fsphp
     ports:
       - 3306:3306
     volumes:
@@ -14,12 +17,10 @@ services:
     container_name: "php-apache"
     build:
       context: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./www/:/var/www/html/
-      - ./conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ./conf/ssl/localhost.crt:/etc/ssl/certs/localhost.crt
-      - ./conf/ssl/localhost.key:/etc/ssl/private/localhost.key
-      - ./conf/apache/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - 80:80
       - 443:443
