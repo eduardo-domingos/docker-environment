@@ -14,3 +14,8 @@ Ambiente com foco em desenvolvimento Web com PHP
 - Strict Mode para banco de dados Desabilitado
 - Porta 443 com SSL
 - Porta 80 sem SSL
+
+## Limitar uso de memória ram e processador
+Na raiz do projeto possuí um arquivo chamado ".wslconfig"
+basta mover esse arquivo para a pasta de C:\users\SeuUsuario\
+e reiniciar a máquina
