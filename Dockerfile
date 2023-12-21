@@ -7,7 +7,8 @@ ENV timezone=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime &&\
     echo ${timezone} > /etc/timezone
 
-RUN apt-get update && apt-get install -y \ 
+RUN apt-get update && apt-get install -y \
+    unzip \
     libfreetype6-dev \
     libjpeg62-turbo-dev \ 
     libgd-dev \
