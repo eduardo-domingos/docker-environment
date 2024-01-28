@@ -1,9 +1,9 @@
-version: "5.0"
+version: "3.8"
 services:
 
   db:
     container_name: "mariadb"
-    image: "mariadb:10.4"
+    image: "mariadb:10.6.16"
     command: ["mysqld", "--sql_mode=", "--default_time_zone=America/Sao_Paulo"]
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
@@ -16,8 +16,6 @@ services:
     container_name: "php-apache"
     build:
       context: .
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     volumes:
       - ./www/:/var/www/html/
     ports:
