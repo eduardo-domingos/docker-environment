@@ -11,6 +11,8 @@ services:
       - 3306:3306
     volumes:
       - ./conf/db:/var/lib/mysql
+    mem_limit: 1g
+    mem_reservation: 300m
 
   php:
     container_name: "php-apache"
@@ -25,3 +27,5 @@ services:
       - db
     depends_on:
       - db
+    mem_limit: 1g
+    mem_reservation: 300m
