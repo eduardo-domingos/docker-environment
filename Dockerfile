@@ -1,5 +1,8 @@
 # imagem base
-FROM php:8.3.3-apache
+FROM php:8.3.6-apache
+
+# execução do composer como root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # define o data/hora como São Paulo
 RUN  echo "America/Sao_Paulo" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
@@ -48,6 +51,12 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # habilitando ssl/reescrita de url (url amigaveis)
 RUN a2enmod rewrite &&\
     a2enmod ssl
+
+# copia o projeto para dentro do container
+COPY ./www /var/www/html
+
+# instala as dependências do projeto
+RUN cd /var/www/html/fsphp/project && composer install
 
 # expondo portas do docker para acesso a máquina fora do docker acessar
 EXPOSE 80 443
